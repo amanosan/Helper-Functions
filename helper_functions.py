@@ -93,7 +93,7 @@ def plot_loss_curves(history):
     plt.plot(epochs, val_accuracy, label='Validation Accuracy')
     plt.title('Accuracy')
     plt.xlabel('Epochs')
-    plt.legend()
+    plt.legend(loc='lower right')
 
 
 # function to compare history of two models
