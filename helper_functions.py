@@ -195,3 +195,46 @@ def calculate_results(y_true, y_preds):
         'f1': f1
     }
     return model_results
+
+
+# function to compare two histories
+def compare_histories(original_history, new_history, initial_epochs=5):
+    """
+    Compare two Model's History Objects.
+    """
+
+    acc = original_history.history['accuracy']
+    loss = original_history.history['loss']
+    val_acc = original_history.history['val_accuracy']
+    val_loss = original_history.history['val_loss']
+
+    # combining the histories:
+    total_acc = acc + new_history.history['accuracy']
+    total_loss = loss + new_history.history['loss']
+    total_val_acc = val_acc + new_history.history['val_accuracy']
+    total_val_loss = val_loss + new_history.history['val_loss']
+
+    plt.figure(figsize=(8, 8))
+    plt.subplot(2, 1, 1)
+    plt.plot(total_acc, label='Training Accuracy')
+    plt.plot(total_val_acc, label='Validation Accuracy')
+    plt.plot(
+        [initial_epochs - 1, initial_epochs - 1],
+        plt.ylim(),
+        label='Start of Fine Tuning'
+    )
+    plt.legend(loc='lower right')
+    plt.title('Training and Validation Accuracy')
+
+    plt.subplot(2, 1, 2)
+    plt.plot(total_loss, label='Training Loss')
+    plt.plot(total_val_loss, label='Validation Loss')
+    plt.plot(
+        [initial_epochs - 1, initial_epochs - 1],
+        plt.ylim(),
+        label='Start of Fine Tuning'
+    )
+    plt.legend(loc='upper right')
+    plt.xlabel('epochs')
+    plt.title('Training and Validation Loss')
+    plt.show()
