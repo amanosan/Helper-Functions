@@ -185,8 +185,7 @@ def calculate_results(y_true, y_preds):
         A dictionary of Accuracy, precision, recall and f1-score.
     """
     model_acc = accuracy_score(y_true, y_preds) * 100
-    precision, recall, f1, _ = precision_recall_fscore_support(
-        y_true, y_preds, average='weighted')
+    precision, recall, f1, _ = precision_recall_fscore_support(y_true, y_preds, average='weighted')
 
     model_results = {
         'accuracy': model_acc,
